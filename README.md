@@ -1,6 +1,6 @@
 # terraform-aws-vpc-peering
 
-[![Terraform Version](https://img.shields.io/badge/Terraform%20Version->=0.11.14-blue.svg)](https://releases.hashicorp.com/terraform/)
+[![Terraform Version](https://img.shields.io/badge/Terraform%20Version->=0.11.14,_<0.12.0-blue.svg)](https://releases.hashicorp.com/terraform/)
 [![Release](https://img.shields.io/github/release/traveloka/terraform-aws-vpc-peering.svg)](https://github.com/traveloka/terraform-aws-vpc-peering/releases)
 [![Last Commit](https://img.shields.io/github/last-commit/traveloka/terraform-aws-vpc-peering.svg)](https://github.com/traveloka/terraform-aws-vpc-peering/commits/master)
 [![Issues](https://img.shields.io/github/issues/traveloka/terraform-aws-vpc-peering.svg)](https://github.com/traveloka/terraform-aws-vpc-peering/issues)
@@ -40,7 +40,7 @@ Terraform module to create VPC peering components for requester and accepter
 
 ## Versioning
 
-Please also see our [CHANGELOG.md](./CHANGELOG.md) for full details.
+Please see our [CHANGELOG.md](./CHANGELOG.md) for full details.
 
 ## Contributing
 
