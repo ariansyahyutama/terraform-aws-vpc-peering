@@ -34,7 +34,7 @@ resource "aws_vpc_peering_connection" "connection" {
 }
 
 resource "aws_vpc_peering_connection_options" "requester" {
-  count = "${var.is_connection_accepted ? 1 : 0}"
+  count = "${var.is_connection_accepted && var.is_requester ? 1 : 0}"
 
   vpc_peering_connection_id = "${aws_vpc_peering_connection.connection.id}"
 
@@ -86,7 +86,7 @@ resource "aws_route" "route_table_public" {
 
   route_table_id            = "${data.aws_route_tables.public.ids[count.index]}"
   destination_cidr_block    = "${var.destination_vpc_cidr_block}"
-  vpc_peering_connection_id = "${var.is_requester ? aws_vpc_peering_connection.connection.id : var.vpc_peering_connection_id}"
+  vpc_peering_connection_id = "${local.vpc_peering_connection_id}"
 
   lifecycle {
     ignore_changes = [
@@ -100,7 +100,7 @@ resource "aws_route" "route_table_app" {
 
   route_table_id            = "${data.aws_route_tables.app.ids[count.index]}"
   destination_cidr_block    = "${var.destination_vpc_cidr_block}"
-  vpc_peering_connection_id = "${var.is_requester ? aws_vpc_peering_connection.connection.id : var.vpc_peering_connection_id}"
+  vpc_peering_connection_id = "${local.vpc_peering_connection_id}"
 
   lifecycle {
     ignore_changes = [
@@ -114,7 +114,7 @@ resource "aws_route" "route_table_data" {
 
   route_table_id            = "${data.aws_route_tables.data.ids[count.index]}"
   destination_cidr_block    = "${var.destination_vpc_cidr_block}"
-  vpc_peering_connection_id = "${var.is_requester ? aws_vpc_peering_connection.connection.id : var.vpc_peering_connection_id}"
+  vpc_peering_connection_id = "${local.vpc_peering_connection_id}"
 
   lifecycle {
     ignore_changes = [
