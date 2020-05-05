@@ -3,7 +3,7 @@
 
 variable "vpc_id" {
   type        = "string"
-  description = "The ID of the VPC. If you are accepter, you can provide empty string for this"
+  description = "The ID of the VPC in your own account"
 }
 
 variable "product_domain" {

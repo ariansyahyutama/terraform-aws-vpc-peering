@@ -17,7 +17,7 @@ module "vpc_peering_to_requester" {
   environment    = "testing"
 
   is_requester               = "false"
-  vpc_id                     = ""
+  vpc_id                     = "vpc-01c234ebd567af890"
   accepter_account_alias     = "tvlk-tsi-dev"
   requester_account_alias    = "tvlk-bei-dev"
   vpc_peering_connection_id  = "pcx-1a2b3c4d5e6f7a890"
