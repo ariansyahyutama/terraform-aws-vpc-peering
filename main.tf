@@ -2,7 +2,7 @@
 # https://www.terraform.io/docs/configuration/resources.html
 
 terraform {
-  required_version = ">= 0.11.14"
+  required_version = ">= 0.11.14 , < 0.12.0"
 }
 
 provider "aws" {
@@ -84,7 +84,7 @@ resource "aws_vpc_peering_connection_options" "accepter" {
 resource "aws_route" "route_table_public" {
   count = "${length(data.aws_route_tables.public.ids)}"
 
-  route_table_id            = "${element(data.aws_route_tables.public.ids[count.index], count.index)}"
+  route_table_id            = "${data.aws_route_tables.public.ids[count.index]}"
   destination_cidr_block    = "${var.destination_vpc_cidr_block}"
   vpc_peering_connection_id = "${var.is_requester ? aws_vpc_peering_connection.connection.id : var.vpc_peering_connection_id}"
 
@@ -98,7 +98,7 @@ resource "aws_route" "route_table_public" {
 resource "aws_route" "route_table_app" {
   count = "${length(data.aws_route_tables.app.ids)}"
 
-  route_table_id            = "${element(data.aws_route_tables.app.ids[count.index], count.index)}"
+  route_table_id            = "${data.aws_route_tables.app.ids[count.index]}"
   destination_cidr_block    = "${var.destination_vpc_cidr_block}"
   vpc_peering_connection_id = "${var.is_requester ? aws_vpc_peering_connection.connection.id : var.vpc_peering_connection_id}"
 
@@ -112,7 +112,7 @@ resource "aws_route" "route_table_app" {
 resource "aws_route" "route_table_data" {
   count = "${length(data.aws_route_tables.data.ids)}"
 
-  route_table_id            = "${element(data.aws_route_tables.data.ids[count.index], count.index)}"
+  route_table_id            = "${data.aws_route_tables.data.ids[count.index]}"
   destination_cidr_block    = "${var.destination_vpc_cidr_block}"
   vpc_peering_connection_id = "${var.is_requester ? aws_vpc_peering_connection.connection.id : var.vpc_peering_connection_id}"
 
