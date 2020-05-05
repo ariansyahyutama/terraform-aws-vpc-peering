@@ -66,7 +66,7 @@ resource "aws_vpc_peering_connection_accepter" "accepter" {
 }
 
 resource "aws_vpc_peering_connection_options" "accepter" {
-  count = "${var.is_connection_accepted ? 1 : 0}"
+  count = "${var.is_connection_accepted && !var.is_requester ? 1 : 0}"
 
   vpc_peering_connection_id = "${aws_vpc_peering_connection_accepter.accepter.id}"
 
