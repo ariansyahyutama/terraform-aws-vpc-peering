@@ -10,7 +10,7 @@ provider "aws" {
   region  = "ap-southeast-1"
 }
 
-module "vpc_peering_to_accepter" {
+module "vpc_peering_requester" {
   source = "../../"
 
   product_domain = "bei"
