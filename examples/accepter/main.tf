@@ -10,7 +10,7 @@ provider "aws" {
   region  = "ap-southeast-1"
 }
 
-module "vpc_peering_to_requester" {
+module "vpc_peering_accepter" {
   source = "../../"
 
   product_domain = "tsi"
