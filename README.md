@@ -68,7 +68,7 @@ module "vpc_peering_requester" {
 ##### Accepter
 ```
 module "vpc_peering_accepter" {
-  source = "git@github.com:traveloka/terraform-aws-vpc-peering.git?ref=v1.0.0" #latest module version this document created
+  source = "git@github.com:traveloka/terraform-aws-vpc-peering.git?ref=v1.0.1" #latest module version this document created
 
   product_domain = "{pd}"
   environment    = "{environment}"
