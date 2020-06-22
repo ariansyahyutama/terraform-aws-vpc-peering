@@ -7,6 +7,8 @@ data "aws_route_tables" "public" {
   tags {
     Tier = "public"
   }
+
+  filter = "${var.aws_route_tables_public_filter}"
 }
 
 data "aws_route_tables" "app" {
@@ -15,6 +17,8 @@ data "aws_route_tables" "app" {
   tags {
     Tier = "app"
   }
+
+  filter = "${var.aws_route_tables_app_filter}"
 }
 
 data "aws_route_tables" "data" {
@@ -23,4 +27,6 @@ data "aws_route_tables" "data" {
   tags {
     Tier = "data"
   }
+
+  filter = "${var.aws_route_tables_data_filter}"
 }

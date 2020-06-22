@@ -68,3 +68,21 @@ variable "vpc_peering_connection_id" {
   type        = "string"
   description = "The ID of VPC peering connection provided by requester. If you are requester, you can provide empty string for this"
 }
+
+variable "aws_route_tables_public_filter" {
+  type        = "list"
+  description = "Additional filter to match the existing public route table"
+  default     = []
+}
+
+variable "aws_route_tables_app_filter" {
+  type        = "list"
+  description = "Additional filter to match the existing app route table"
+  default     = []
+}
+
+variable "aws_route_tables_data_filter" {
+  type        = "list"
+  description = "Additional filter to match the existing data route table"
+  default     = []
+}

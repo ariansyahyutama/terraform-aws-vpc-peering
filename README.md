@@ -84,6 +84,20 @@ module "vpc_peering_accepter" {
   peer_vpc_region            = "{requester vpc region}"
 
   is_connection_accepted = "true"
+
+  aws_route_tables_public_filter = [
+    {
+      name   = "tag:Name"
+      values = ["prod-pub-rtb"]
+    },
+  ]
+
+  aws_route_tables_app_filter = [
+    {
+      name   = "tag:Name"
+      values = ["prod-app-rtb-*"]
+    },
+  ]
 }
 ```
 
