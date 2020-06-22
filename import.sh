@@ -9,9 +9,14 @@ read module_name
 echo "Is requester? (y/n):"
 read is_requester
 
-echo $(terraform import module.${module_name}.aws_vpc_peering_connection.connection ${vpc_peering_id})
 if [ "$is_requester" == "y" ]; then
+  echo $(terraform import module.${module_name}.aws_vpc_peering_connection.connection ${vpc_peering_id})
   echo $(terraform import module.${module_name}.aws_vpc_peering_connection_options.requester ${vpc_peering_id})
+fi
+
+if [ "$is_requester" == "n" ]; then
+  echo $(terraform import module.${module_name}.aws_vpc_peering_connection_accepter.accepter ${vpc_peering_id})
+  echo $(terraform import module.${module_name}.aws_vpc_peering_connection_options.accepter ${vpc_peering_id})
 fi
 
 SAVEIFS=$IFS   # Save current IFS
