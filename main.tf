@@ -61,7 +61,8 @@ resource "aws_vpc_peering_connection_accepter" "accepter" {
     map("ProductDomain", var.product_domain),
     map("Environment", var.environment),
     map("Description", format("VPC peering connection to %s", var.requester_account_alias)),
-    map("ManagedBy", "terraform"))
+    map("ManagedBy", "terraform"),
+    map("Side", "accepter"))
   }"
 }
 
