@@ -77,7 +77,7 @@ resource "aws_vpc_peering_connection_options" "accepter" {
 ############################
 
 resource "aws_route" "route_table_public" {
-  for_each = data.aws_route_tables.app.ids
+  for_each = data.aws_route_tables.public.ids
 
   route_table_id            = each.value
   destination_cidr_block    = var.destination_vpc_cidr_block
@@ -105,7 +105,7 @@ resource "aws_route" "route_table_app" {
 }
 
 resource "aws_route" "route_table_data" {
-  for_each = data.aws_route_tables.app.ids
+  for_each = data.aws_route_tables.data.ids
 
   route_table_id            = each.value
   destination_cidr_block    = var.destination_vpc_cidr_block
