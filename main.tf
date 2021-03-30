@@ -5,17 +5,6 @@ terraform {
   required_version = ">= 0.13.0"
 }
 
-
-
-# Provides details about a specific AWS region.
-data "aws_region" "current" {
-}
-
-provider "aws" {
-  version = ">= 3.0.0"
-  region = data.aws_region.current.name
-}
-
 #############
 # Requester #
 #############
