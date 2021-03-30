@@ -29,7 +29,7 @@ resource "aws_vpc_peering_connection" "connection" {
     map("Environment", var.environment),
     map("Description", format("VPC peering connection to %s", var.accepter_account_alias)),
     map("ManagedBy", "terraform"),
-  map("Side", "requester"))
+    map("Side", "requester"))
 }
 
 resource "aws_vpc_peering_connection_options" "requester" {
@@ -61,7 +61,7 @@ resource "aws_vpc_peering_connection_accepter" "accepter" {
     map("Environment", var.environment),
     map("Description", format("VPC peering connection to %s", var.requester_account_alias)),
     map("ManagedBy", "terraform"),
-  map("Side", "accepter"))
+    map("Side", "accepter"))
 }
 
 resource "aws_vpc_peering_connection_options" "accepter" {
