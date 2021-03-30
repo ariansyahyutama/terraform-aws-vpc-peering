@@ -10,6 +10,8 @@ terraform {
 #############
 
 resource "aws_vpc_peering_connection" "connection" {
+  count = var.is_requester ? 1 : 0
+
   vpc_id        = var.vpc_id
   peer_owner_id = var.peer_account_id
   peer_region   = var.peer_vpc_region
@@ -27,7 +29,9 @@ resource "aws_vpc_peering_connection" "connection" {
 }
 
 resource "aws_vpc_peering_connection_options" "requester" {
-  vpc_peering_connection_id = aws_vpc_peering_connection.connection.id
+  count = var.is_connection_accepted && var.is_requester ? 1 : 0
+
+  vpc_peering_connection_id = aws_vpc_peering_connection.connection[count.index].id
 
   requester {
     allow_remote_vpc_dns_resolution  = local.allow_dns_resolution
@@ -41,6 +45,8 @@ resource "aws_vpc_peering_connection_options" "requester" {
 ############
 
 resource "aws_vpc_peering_connection_accepter" "accepter" {
+  count = var.is_requester ? 0 : 1
+
   vpc_peering_connection_id = var.vpc_peering_connection_id
   auto_accept               = true
 
@@ -55,7 +61,9 @@ resource "aws_vpc_peering_connection_accepter" "accepter" {
 }
 
 resource "aws_vpc_peering_connection_options" "accepter" {
-  vpc_peering_connection_id = aws_vpc_peering_connection_accepter.accepter.id
+  count = var.is_connection_accepted && ! var.is_requester ? 1 : 0
+
+  vpc_peering_connection_id = aws_vpc_peering_connection_accepter.accepter[count.index].id
 
   accepter {
     allow_remote_vpc_dns_resolution  = local.allow_dns_resolution
@@ -69,7 +77,9 @@ resource "aws_vpc_peering_connection_options" "accepter" {
 ############################
 
 resource "aws_route" "route_table_public" {
-  route_table_id            = data.aws_route_tables.public.id
+  for_each = data.aws_route_tables.app.ids
+
+  route_table_id            = each.value
   destination_cidr_block    = var.destination_vpc_cidr_block
   vpc_peering_connection_id = local.vpc_peering_connection_id
 
@@ -81,7 +91,9 @@ resource "aws_route" "route_table_public" {
 }
 
 resource "aws_route" "route_table_app" {
-  route_table_id            = data.aws_route_tables.app.id
+  for_each = data.aws_route_tables.app.ids
+
+  route_table_id            = each.value
   destination_cidr_block    = var.destination_vpc_cidr_block
   vpc_peering_connection_id = local.vpc_peering_connection_id
 
@@ -93,7 +105,9 @@ resource "aws_route" "route_table_app" {
 }
 
 resource "aws_route" "route_table_data" {
-  route_table_id            = data.aws_route_tables.data.id
+  for_each = data.aws_route_tables.app.ids
+
+  route_table_id            = each.value
   destination_cidr_block    = var.destination_vpc_cidr_block
   vpc_peering_connection_id = local.vpc_peering_connection_id
 
