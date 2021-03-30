@@ -4,7 +4,7 @@
 data "aws_route_tables" "public" {
   vpc_id = var.vpc_id
 
-  tags {
+  tags = {
     Tier = "public"
   }
 
@@ -14,7 +14,7 @@ data "aws_route_tables" "public" {
 data "aws_route_tables" "app" {
   vpc_id = var.vpc_id
 
-  tags {
+  tags = {
     Tier = "app"
   }
 
@@ -24,7 +24,7 @@ data "aws_route_tables" "app" {
 data "aws_route_tables" "data" {
   vpc_id = var.vpc_id
 
-  tags {
+  tags = {
     Tier = "data"
   }
 
