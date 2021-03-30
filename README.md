@@ -20,7 +20,7 @@
 
 ## Prerequisites
 
-- [Terraform](https://releases.hashicorp.com/terraform/). This module currently tested on `0.12.30`
+- [Terraform](https://releases.hashicorp.com/terraform/). This module currently tested on `0.12.30` and `0.13.5`
 
 ## Dependencies
 
