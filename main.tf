@@ -2,7 +2,7 @@
 # https://www.terraform.io/docs/configuration/resources.html
 
 terraform {
-  required_version = ">= 0.13.0"
+  required_version = ">= 0.12.0"
 }
 
 #############
@@ -85,7 +85,7 @@ resource "aws_route" "route_table_public" {
 
   lifecycle {
     ignore_changes = [
-      "id",
+      id,
     ]
   }
 }
@@ -99,7 +99,7 @@ resource "aws_route" "route_table_app" {
 
   lifecycle {
     ignore_changes = [
-      "id",
+      id,
     ]
   }
 }
@@ -113,7 +113,7 @@ resource "aws_route" "route_table_data" {
 
   lifecycle {
     ignore_changes = [
-      "id",
+      id,
     ]
   }
 }
