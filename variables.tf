@@ -25,13 +25,13 @@ variable "additional_tags" {
 variable "is_connection_accepted" {
   type        = "string"
   description = "Whether or not the connection is accepted"
-  default     = "true"
+  default     = true
 }
 
 variable "is_requester" {
   type        = "string"
   description = "Identifier to differentiate requester (true) and accepter (false)"
-  default     = "false"
+  default     = false
 }
 
 variable "accepter_account_alias" {

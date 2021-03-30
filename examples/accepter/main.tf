@@ -16,7 +16,7 @@ module "vpc_peering_accepter" {
   product_domain = "tsi"
   environment    = "testing"
 
-  is_requester               = "false"
+  is_requester               = false
   vpc_id                     = "vpc-1a2b3c4d5e6f7g8h9i"
   accepter_account_alias     = "aws-accepter"
   requester_account_alias    = "aws-requester"
@@ -26,5 +26,5 @@ module "vpc_peering_accepter" {
   peer_vpc_id                = "vpc-2a2b3c4d5e6f7g8h9i"
   peer_vpc_region            = "ap-southeast-1"
 
-  is_connection_accepted = "true"
+  is_connection_accepted = true
 }

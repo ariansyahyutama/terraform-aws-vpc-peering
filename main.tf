@@ -6,7 +6,7 @@ terraform {
 }
 
 provider "aws" {
-  version = ">= 2.0.0, < 3.0.0"
+  version = ">= 3.0.0"
 }
 
 #############
@@ -20,7 +20,7 @@ resource "aws_vpc_peering_connection" "connection" {
   peer_owner_id = var.peer_account_id
   peer_region   = var.peer_vpc_region
   peer_vpc_id   = var.peer_vpc_id
-  auto_accept   = "false"
+  auto_accept   = false
 
   tags = merge(
     var.additional_tags,
@@ -29,7 +29,7 @@ resource "aws_vpc_peering_connection" "connection" {
     map("Environment", var.environment),
     map("Description", format("VPC peering connection to %s", var.accepter_account_alias)),
     map("ManagedBy", "terraform"),
-    map("Side", "requester"))
+  map("Side", "requester"))
 }
 
 resource "aws_vpc_peering_connection_options" "requester" {
@@ -52,7 +52,7 @@ resource "aws_vpc_peering_connection_accepter" "accepter" {
   count = var.is_requester ? 0 : 1
 
   vpc_peering_connection_id = var.vpc_peering_connection_id
-  auto_accept               = "true"
+  auto_accept               = true
 
   tags = merge(
     var.additional_tags,
@@ -61,11 +61,11 @@ resource "aws_vpc_peering_connection_accepter" "accepter" {
     map("Environment", var.environment),
     map("Description", format("VPC peering connection to %s", var.requester_account_alias)),
     map("ManagedBy", "terraform"),
-    map("Side", "accepter"))
+  map("Side", "accepter"))
 }
 
 resource "aws_vpc_peering_connection_options" "accepter" {
-  count = var.is_connection_accepted && !var.is_requester ? 1 : 0
+  count = var.is_connection_accepted && ! var.is_requester ? 1 : 0
 
   vpc_peering_connection_id = aws_vpc_peering_connection_accepter.accepter.id
 

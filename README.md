@@ -51,7 +51,7 @@ module "vpc_peering_requester" {
   product_domain = "{pd}"
   environment    = "{environment}"
 
-  is_requester               = "true"
+  is_requester               = true
   vpc_id                     = "{requester vpc id}"
   accepter_account_alias     = "{accepter account alias}"
   requester_account_alias    = "{requester account alias}"
@@ -61,7 +61,7 @@ module "vpc_peering_requester" {
   peer_vpc_id                = "{accepter vpc id}"
   peer_vpc_region            = "{accepter vpc region}"
 
-  is_connection_accepted = "false" # set this as false in this step
+  is_connection_accepted = false # set this as false in this step
 }
 ```
 
@@ -73,7 +73,7 @@ module "vpc_peering_accepter" {
   product_domain = "{pd}"
   environment    = "{environment}"
 
-  is_requester               = "false"
+  is_requester               = false
   vpc_id                     = "{accepter vpc id}"
   accepter_account_alias     = "{accepter account alias}"
   requester_account_alias    = "{requester account alias}"
@@ -83,7 +83,7 @@ module "vpc_peering_accepter" {
   peer_vpc_id                = "{requester vpc id}"
   peer_vpc_region            = "{requester vpc region}"
 
-  is_connection_accepted = "true"
+  is_connection_accepted = true
 
   aws_route_tables_public_filter = [
     {
