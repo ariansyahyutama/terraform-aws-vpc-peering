@@ -1,6 +1,6 @@
 # terraform-aws-vpc-peering
 
-[![Terraform Version](https://img.shields.io/badge/Terraform%20Version->=0.11.14,_<0.12.0-blue.svg)](https://releases.hashicorp.com/terraform/)
+[![Terraform Version](https://img.shields.io/badge/Terraform%20Version-%3E=0.12.0-blue.svg)](https://releases.hashicorp.com/terraform/)
 [![Release](https://img.shields.io/github/release/traveloka/terraform-aws-vpc-peering.svg)](https://github.com/traveloka/terraform-aws-vpc-peering/releases)
 [![Last Commit](https://img.shields.io/github/last-commit/traveloka/terraform-aws-vpc-peering.svg)](https://github.com/traveloka/terraform-aws-vpc-peering/commits/master)
 [![Issues](https://img.shields.io/github/issues/traveloka/terraform-aws-vpc-peering.svg)](https://github.com/traveloka/terraform-aws-vpc-peering/issues)
@@ -20,7 +20,7 @@
 
 ## Prerequisites
 
-- [Terraform](https://releases.hashicorp.com/terraform/). This module currently tested on `0.11.14`
+- [Terraform](https://releases.hashicorp.com/terraform/). This module currently tested on `0.12.30`
 
 ## Dependencies
 
