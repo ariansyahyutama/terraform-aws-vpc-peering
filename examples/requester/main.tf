@@ -2,7 +2,7 @@
 # https://www.terraform.io/docs/configuration/resources.html
 
 terraform {
-  required_version = ">= 0.12.30"
+  required_version = ">= 0.12.31"
 }
 
 provider "aws" {

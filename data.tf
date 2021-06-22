@@ -11,7 +11,7 @@ data "aws_route_tables" "public" {
   dynamic "filter" {
     for_each = var.aws_route_tables_public_filter
     content {
-      name = setting.value["name"]
+      name   = setting.value["name"]
       values = setting.value["values"]
     }
 
@@ -28,7 +28,7 @@ data "aws_route_tables" "app" {
   dynamic "filter" {
     for_each = var.aws_route_tables_app_filter
     content {
-      name = setting.value["name"]
+      name   = setting.value["name"]
       values = setting.value["values"]
     }
 
@@ -45,7 +45,7 @@ data "aws_route_tables" "data" {
   dynamic "filter" {
     for_each = var.aws_route_tables_data_filter
     content {
-      name = setting.value["name"]
+      name   = setting.value["name"]
       values = setting.value["values"]
     }
 

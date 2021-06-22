@@ -35,6 +35,45 @@ Terraform module to create VPC peering components for requester and accepter
 * [VPC Peering accepter-side](https://github.com/traveloka/terraform-aws-vpc-peering/tree/master/examples/accepter)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.31 |
+| aws | ~> 3.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | ~> 3.0 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| accepter\_account\_alias | AWS Account alias of the accepter. This will be used in tag to help you easily identify the peering connection | `string` | n/a | yes |
+| additional\_tags | Additional tags to be added to the peering connection tag | `map` | `{}` | no |
+| aws\_route\_tables\_app\_filter | Additional filter to match the existing app route table | `list` | `[]` | no |
+| aws\_route\_tables\_data\_filter | Additional filter to match the existing data route table | `list` | `[]` | no |
+| aws\_route\_tables\_public\_filter | Additional filter to match the existing public route table | `list` | `[]` | no |
+| destination\_vpc\_cidr\_block | CIDR of the peer account's VPC | `string` | n/a | yes |
+| environment | Environment the VPC peering belongs to (testing, staging, or production) | `string` | n/a | yes |
+| is\_connection\_accepted | Whether or not the connection is accepted | `string` | `true` | no |
+| is\_requester | Identifier to differentiate requester (true) and accepter (false) | `string` | `false` | no |
+| peer\_account\_id | The AWS account ID of the owner of the peer VPC. If you are accepter, you can provide empty string for this | `string` | n/a | yes |
+| peer\_vpc\_id | The ID of the VPC with which you are creating the VPC Peering connection. If you are accepter, you can provide empty string for this | `string` | n/a | yes |
+| peer\_vpc\_region | The region of the accepter VPC of the VPC Peering Connection. If you are accepter, you can provide empty string for this | `string` | n/a | yes |
+| product\_domain | Product domain that own these resources | `string` | n/a | yes |
+| requester\_account\_alias | AWS Account alias of the requester. This will be used in tag to help you easily identify the peering connection | `string` | n/a | yes |
+| vpc\_id | The ID of the VPC in your own account | `string` | n/a | yes |
+| vpc\_peering\_connection\_id | The ID of VPC peering connection provided by requester. If you are requester, you can provide empty string for this | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| vpc\_peering\_connection\_id | The ID of the VPC Peering Connection. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
