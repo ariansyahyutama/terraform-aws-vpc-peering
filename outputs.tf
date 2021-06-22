@@ -3,5 +3,5 @@
 
 output "vpc_peering_connection_id" {
   description = "The ID of the VPC Peering Connection."
-  value       = "${local.vpc_peering_connection_id}"
+  value       = local.vpc_peering_connection_id
 }

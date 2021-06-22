@@ -1,6 +1,6 @@
 # terraform-aws-vpc-peering
 
-[![Terraform Version](https://img.shields.io/badge/Terraform%20Version->=0.11.14,_<0.12.0-blue.svg)](https://releases.hashicorp.com/terraform/)
+[![Terraform Version](https://img.shields.io/badge/Terraform%20Version-%3E=0.12.0-blue.svg)](https://releases.hashicorp.com/terraform/)
 [![Release](https://img.shields.io/github/release/traveloka/terraform-aws-vpc-peering.svg)](https://github.com/traveloka/terraform-aws-vpc-peering/releases)
 [![Last Commit](https://img.shields.io/github/last-commit/traveloka/terraform-aws-vpc-peering.svg)](https://github.com/traveloka/terraform-aws-vpc-peering/commits/master)
 [![Issues](https://img.shields.io/github/issues/traveloka/terraform-aws-vpc-peering.svg)](https://github.com/traveloka/terraform-aws-vpc-peering/issues)
@@ -20,7 +20,7 @@
 
 ## Prerequisites
 
-- [Terraform](https://releases.hashicorp.com/terraform/). This module currently tested on `0.11.14`
+- [Terraform](https://releases.hashicorp.com/terraform/). This module currently tested on `0.12.30` and `0.13.5`
 
 ## Dependencies
 
@@ -35,6 +35,45 @@ Terraform module to create VPC peering components for requester and accepter
 * [VPC Peering accepter-side](https://github.com/traveloka/terraform-aws-vpc-peering/tree/master/examples/accepter)
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.31 |
+| aws | ~> 3.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| aws | ~> 3.0 |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| accepter\_account\_alias | AWS Account alias of the accepter. This will be used in tag to help you easily identify the peering connection | `string` | n/a | yes |
+| additional\_tags | Additional tags to be added to the peering connection tag | `map` | `{}` | no |
+| aws\_route\_tables\_app\_filter | Additional filter to match the existing app route table | `list` | `[]` | no |
+| aws\_route\_tables\_data\_filter | Additional filter to match the existing data route table | `list` | `[]` | no |
+| aws\_route\_tables\_public\_filter | Additional filter to match the existing public route table | `list` | `[]` | no |
+| destination\_vpc\_cidr\_block | CIDR of the peer account's VPC | `string` | n/a | yes |
+| environment | Environment the VPC peering belongs to (testing, staging, or production) | `string` | n/a | yes |
+| is\_connection\_accepted | Whether or not the connection is accepted | `string` | `true` | no |
+| is\_requester | Identifier to differentiate requester (true) and accepter (false) | `string` | `false` | no |
+| peer\_account\_id | The AWS account ID of the owner of the peer VPC. If you are accepter, you can provide empty string for this | `string` | n/a | yes |
+| peer\_vpc\_id | The ID of the VPC with which you are creating the VPC Peering connection. If you are accepter, you can provide empty string for this | `string` | n/a | yes |
+| peer\_vpc\_region | The region of the accepter VPC of the VPC Peering Connection. If you are accepter, you can provide empty string for this | `string` | n/a | yes |
+| product\_domain | Product domain that own these resources | `string` | n/a | yes |
+| requester\_account\_alias | AWS Account alias of the requester. This will be used in tag to help you easily identify the peering connection | `string` | n/a | yes |
+| vpc\_id | The ID of the VPC in your own account | `string` | n/a | yes |
+| vpc\_peering\_connection\_id | The ID of VPC peering connection provided by requester. If you are requester, you can provide empty string for this | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| vpc\_peering\_connection\_id | The ID of the VPC Peering Connection. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
@@ -51,7 +90,7 @@ module "vpc_peering_requester" {
   product_domain = "{pd}"
   environment    = "{environment}"
 
-  is_requester               = "true"
+  is_requester               = true
   vpc_id                     = "{requester vpc id}"
   accepter_account_alias     = "{accepter account alias}"
   requester_account_alias    = "{requester account alias}"
@@ -61,7 +100,7 @@ module "vpc_peering_requester" {
   peer_vpc_id                = "{accepter vpc id}"
   peer_vpc_region            = "{accepter vpc region}"
 
-  is_connection_accepted = "false" # set this as false in this step
+  is_connection_accepted = false # set this as false in this step
 }
 ```
 
@@ -73,7 +112,7 @@ module "vpc_peering_accepter" {
   product_domain = "{pd}"
   environment    = "{environment}"
 
-  is_requester               = "false"
+  is_requester               = false
   vpc_id                     = "{accepter vpc id}"
   accepter_account_alias     = "{accepter account alias}"
   requester_account_alias    = "{requester account alias}"
@@ -83,7 +122,7 @@ module "vpc_peering_accepter" {
   peer_vpc_id                = "{requester vpc id}"
   peer_vpc_region            = "{requester vpc region}"
 
-  is_connection_accepted = "true"
+  is_connection_accepted = true
 
   aws_route_tables_public_filter = [
     {
