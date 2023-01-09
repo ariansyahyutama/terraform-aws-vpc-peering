@@ -61,20 +61,12 @@ resource "aws_vpc_peering_connection_accepter" "accepter" {
 
   tags = merge(
     var.additional_tags,
-    tomap({"Name" = format("%s-%s", var.requester_account_alias, var.accepter_account_alias)})
-    #map("ProductDomain", var.product_domain),
+    tomap({"Name" = format("%s-%s", var.requester_account_alias, var.accepter_account_alias)}),
+    tomap({"ProductDomain" = var.product_domain}),
     #map("Environment", var.environment),
     #map("Description", format("VPC peering connection to %s", var.requester_account_alias)),
     #map("ManagedBy", "terraform"),
     #map("Side", "accepter"))
-    /*
-    map("Name", format("%s-%s", var.requester_account_alias, var.accepter_account_alias)),
-    map("ProductDomain", var.product_domain),
-    map("Environment", var.environment),
-    map("Description", format("VPC peering connection to %s", var.requester_account_alias)),
-    map("ManagedBy", "terraform"),
-    map("Side", "accepter"))
-    */
 }
 
 resource "aws_vpc_peering_connection_options" "accepter" {
