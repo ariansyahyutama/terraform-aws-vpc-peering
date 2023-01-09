@@ -12,42 +12,6 @@ terraform {
   }
 }
 
-#############
-# Requester #
-#############
-
-/*
-resource "aws_vpc_peering_connection" "connection" {
-  count = var.is_requester ? 1 : 0
-
-  vpc_id        = var.vpc_id
-  peer_owner_id = var.peer_account_id
-  peer_region   = var.peer_vpc_region
-  peer_vpc_id   = var.peer_vpc_id
-  auto_accept   = false
-
-  tags = merge(
-    var.additional_tags,
-    map("Name", format("%s-%s", var.requester_account_alias, var.accepter_account_alias)),
-    map("ProductDomain", var.product_domain),
-    map("Environment", var.environment),
-    map("Description", format("VPC peering connection to %s", var.accepter_account_alias)),
-    map("ManagedBy", "terraform"),
-  map("Side", "requester"))
-}
-
-resource "aws_vpc_peering_connection_options" "requester" {
-  count = var.is_connection_accepted && var.is_requester ? 1 : 0
-
-  vpc_peering_connection_id = aws_vpc_peering_connection.connection[count.index].id
-
-  requester {
-    allow_remote_vpc_dns_resolution  = local.allow_dns_resolution
-    allow_classic_link_to_remote_vpc = local.allow_classic_link_connection
-    allow_vpc_to_remote_classic_link = local.allow_classic_link_connection
-  }
-}
-*/
 
 ############
 # Accepter #
@@ -59,8 +23,8 @@ resource "aws_vpc_peering_connection_accepter" "accepter" {
   vpc_peering_connection_id = var.vpc_peering_connection_id
   auto_accept               = true
 
-  tags = merge(
-    var.additional_tags,
+  #tags = merge(
+    #var.additional_tags,
     #tomap({"Name" = format("%s-%s", var.requester_account_alias, var.accepter_account_alias)}),
     #tomap({"ProductDomain" = var.product_domain}),
     #map("Environment", var.environment),
